@@ -10,8 +10,8 @@ export function CompanyPage() {
       <HeroSection />
       <StorySection />
       <ValuesSection />
-      <TeamSection />
-      <GallerySection />
+      {/* <TeamSection /> */}
+      {/* <GallerySection /> */}
     </div>
   );
 }

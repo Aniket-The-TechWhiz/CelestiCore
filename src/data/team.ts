@@ -9,10 +9,10 @@ export interface TeamMember {
 
 export const teamMembers: TeamMember[] = [
   {
-    name: "Alex Johnson",
-    role: "CEO & Co-Founder",
+    name: "Aniket Yelameli",
+    role: "Founder",
     expertise: "Business Strategy & Product Vision",
-    image: "/images/team/alex-johnson.jpg",
+    image: "/images/team/aniket.JPG",
     linkedin: "https://linkedin.com/in/alexjohnson",
     email: "alex.johnson@celesticore.com",
   },
