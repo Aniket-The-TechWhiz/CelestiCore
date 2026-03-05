@@ -42,6 +42,7 @@ function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -54,8 +55,11 @@ function ContactSection() {
   });
 
   // Refs for scrolling to errors
-  const emailRef = useRef<HTMLDivElement>(null);
-  const phoneRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const phoneRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+
+  // API URL for form submission
+  const API_URL = "https://script.google.com/macros/s/AKfycbzWAijA7pAyQVzz9A2f7BbsuzyxPCfE2qJSFh1x5pb1KLjzKZ_ds4csBG28aYoFFXJU/exec";
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -70,7 +74,7 @@ function ContactSection() {
     return phoneRegex.test(phone.replace(/[\s-]/g, ""));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     let firstErrorRef: React.RefObject<HTMLDivElement> | null = null;
@@ -106,13 +110,42 @@ function ContactSection() {
       return;
     }
 
-    // Clear errors and submit
-    setErrors({ email: "", phone: "" });
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", phone: "", message: "" });
-    }, 3000);
+    setIsLoading(true);
+
+    try {
+      // Convert formData to URLSearchParams to avoid CORS preflight
+      const formBody = new URLSearchParams();
+      formBody.append("name", formData.name);
+      formBody.append("email", formData.email);
+      formBody.append("phone", formData.phone);
+      formBody.append("message", formData.message);
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: formBody,
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        }, 3000);
+      } else {
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (
@@ -158,7 +191,7 @@ function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              {/*<div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#2FFFA3] to-[#1FDD8A] flex items-center justify-center text-white flex-shrink-0">
                   <Phone size={24} />
                 </div>
@@ -167,7 +200,7 @@ function ContactSection() {
                   <p className="text-gray-600">+91 98765 43210</p>
                   <p className="text-gray-600">+91 98765 43211</p>
                 </div>
-              </div>
+              </div>*/}
 
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white flex-shrink-0">
@@ -191,7 +224,7 @@ function ContactSection() {
                 <Mail size={20} />
                 Email Us
               </a>
-              <a
+              {/*<a
                 href="https://wa.me/919876543210"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -206,7 +239,7 @@ function ContactSection() {
               >
                 <Phone size={20} />
                 Call Now
-              </a>
+              </a>*/}
             </div>
           </motion.div>
 
@@ -306,10 +339,11 @@ function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all text-lg"
+                    disabled={isLoading}
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send size={20} />
-                    Send Message
+                    {isLoading ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               </form>

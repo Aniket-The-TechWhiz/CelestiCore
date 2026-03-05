@@ -57,8 +57,8 @@ function StorySection() {
         >
           <h2 className="text-4xl md:text-5xl mb-6">Our Story</h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Founded with a vision to empower businesses with scalable tech, CelestiCore
-            has become a trusted partner for brands across industries.
+            CelestiCore started as a new startup in 2025 with one clear
+            mission: build practical digital solutions that help businesses grow.
           </p>
         </motion.div>
 
@@ -70,22 +70,21 @@ function StorySection() {
         >
           <div className="space-y-6 text-gray-600 leading-relaxed">
             <p>
-              It all started in 2021 with a simple belief: technology should
-              empower, not complicate. Our founders, a group of passionate
-              engineers and designers, came together with a mission to build
-              products that truly matter.
+              We began our journey in 2025 as a small team of engineers
+              and designers. In the early days, we focused on understanding
+              real client problems and turning ideas into reliable web and
+              software solutions.
             </p>
             <p>
-              From our humble beginnings in a small office, we've grown into a
-              team of talented professionals serving clients worldwide. We've
-              delivered over 120 successful projects, trained 300+ interns, and
-              built products used by thousands of users daily.
+              As a young startup, we delivered multiple projects for clients
+              across different industries, from business websites to custom
+              digital products. Each project helped us improve our process,
+              strengthen our team, and build long-term client trust.
             </p>
             <p>
-              Today, CelestiCore stands as a testament to what's possible when
-              innovation meets dedication. We continue to push boundaries,
-              explore new technologies, and create solutions that make a
-              difference in people's lives.
+              Now our next chapter is scale. We are expanding our capabilities,
+              growing our team, and building larger, more impactful solutions
+              for clients who want a technology partner for long-term growth.
             </p>
           </div>
         </motion.div>

@@ -18,7 +18,7 @@ export function Header() {
     { label: "Products", path: "/products" },
     { label: "Company", path: "/company" },
     { label: "Internships", path: "/internships" },
-    { label: "Jobs", path: "/jobs" },
+   /* { label: "Jobs", path: "/jobs" },*/
     { label: "Contact", path: "/contact" },
   ];
 

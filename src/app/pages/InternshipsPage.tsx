@@ -12,11 +12,7 @@ import {
   Clock,
   Upload,
   Check,
-  CreditCard,
-  Building,
-  Smartphone as Phone,
-  Wallet,
-  ArrowLeft,
+
 } from "lucide-react";
 
 export function InternshipsPage() {
@@ -289,7 +285,8 @@ function TimelineSection() {
 function ApplicationForm() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const [step, setStep] = useState<"form" | "payment" | "success">("form");
+  const [step, setStep] = useState<"form" | "success">("form");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -299,24 +296,19 @@ function ApplicationForm() {
     experience: "",
     resume: null as File | null,
   });
-  const [paymentMethod, setPaymentMethod] = useState("");
   const [errors, setErrors] = useState({
     email: "",
     phone: "",
     resume: "",
   });
 
+  // Google Apps Script API URL - REPLACE WITH YOUR NEW DEPLOYMENT URL
+  const API_URL = "https://script.google.com/macros/s/AKfycbwxcWfZTynrZlWmIrzD7vRayNhkyOP9A0vj606YD1AxU__bqC-QVOWThgdULASTCIOYnw/exec";
+
   // Refs for scrolling to errors
   const emailRef = useRef<HTMLDivElement | null>(null);
   const phoneRef = useRef<HTMLDivElement | null>(null);
   const resumeRef = useRef<HTMLDivElement | null>(null);
-
-  // Pricing based on duration (in INR)
-  const pricing: { [key: string]: number } = {
-    "1": 24999,
-    "2": 41999,
-    "3": 58999,
-  };
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -367,15 +359,66 @@ function ApplicationForm() {
       return;
     }
 
-    // Clear errors and proceed
+    // Clear errors and proceed to submit
     setErrors({ email: "", phone: "", resume: "" });
-    setStep("payment");
+    setIsSubmitting(true);
+
+    // Convert resume to base64 and submit to Google Sheets
+    if (formData.resume) {
+      const reader = new FileReader();
+      
+      reader.readAsDataURL(formData.resume);
+      
+      reader.onload = async () => {
+        try {
+          const base64File = (reader.result as string).split(",")[1];
+          
+          const payload = {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            program: formData.program,
+            duration: formData.duration,
+            experience: formData.experience,
+            resume: base64File,
+            fileName: formData.resume!.name,
+            fileType: formData.resume!.type
+          };
+          
+          const response = await fetch(API_URL, {
+            method: "POST",
+            body: new URLSearchParams(payload as any)
+          });
+          
+          let result;
+          try {
+            result = await response.json();
+          } catch (parseError) {
+            result = { status: "unknown" };
+          }
+
+          if (result.status === "success" || response.ok) {
+            setStep("success");
+          } else {
+            alert("Failed to submit application. Please try again.");
+          }
+          
+        } catch (error) {
+          alert("Error submitting application. Please try again.");
+        } finally {
+          setIsSubmitting(false);
+        }
+      };
+
+      reader.onerror = () => {
+        console.error("Error reading file");
+        alert("Failed to read resume file. Please try again.");
+        setIsSubmitting(false);
+      };
+    }
   };
 
-  const handlePayment = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStep("success");
-  };
+
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -433,344 +476,16 @@ function ApplicationForm() {
               <Check size={40} className="text-[#2FFFA3]" />
             </div>
             <h2 className="text-4xl md:text-5xl mb-6 text-[#111111]">
-              Payment Successful!
+              Application Submitted!
             </h2>
             <p className="text-lg text-gray-800 leading-relaxed mb-4">
-              Welcome to CelestiCore — your dashboard login details have been sent to{" "}
-              <strong>{formData.email}</strong>
+              Thank you for applying to the CelestiCore internship program.
+              A confirmation email has been sent to <strong>{formData.email}</strong>
             </p>
             <p className="text-base text-gray-700">
               Our team will review your application and reach out within 48
-              hours. Check your email for access credentials and next steps.
+              hours with next steps.
             </p>
-          </motion.div>
-        </div>
-      </section>
-    );
-  }
-
-  // Payment Page
-  if (step === "payment") {
-    const amount = pricing[formData.duration] || 0;
-    const tax = Math.round(amount * 0.18);
-    const total = amount + tax;
-
-    return (
-      <section className="py-24 bg-gradient-to-br from-purple-50 to-[#FAFAFA] min-h-screen">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <button
-              onClick={() => setStep("form")}
-              className="flex items-center gap-2 text-[#A020F0] hover:gap-3 transition-all mb-8"
-            >
-              <ArrowLeft size={20} />
-              Back to Application
-            </button>
-
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl mb-4">Complete Payment</h2>
-              <p className="text-lg text-gray-600">
-                Secure your spot in the internship program
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Order Summary */}
-              <div className="md:col-span-1">
-                <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-200 sticky top-24">
-                  <h3 className="text-xl mb-6">Order Summary</h3>
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <p className="text-sm text-gray-500">Applicant</p>
-                      <p className="font-medium">{formData.name}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Program</p>
-                      <p className="font-medium capitalize">{formData.program} Development</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Duration</p>
-                      <p className="font-medium">{formData.duration} {formData.duration === "1" ? "Month" : "Months"}</p>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-gray-200 pt-4 space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Program Fee</span>
-                      <span className="font-medium">₹{amount}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Tax (18%)</span>
-                      <span className="font-medium">₹{tax}</span>
-                    </div>
-                    <div className="flex justify-between text-lg pt-3 border-t border-gray-200">
-                      <span className="font-semibold">Total</span>
-                      <span className="font-semibold text-[#A020F0]">
-                        ₹{total}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Payment Form */}
-              <div className="md:col-span-2">
-                <form onSubmit={handlePayment} className="space-y-6">
-                  {/* Payment Method Selection */}
-                  <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
-                    <h3 className="text-xl mb-6">Select Payment Method</h3>
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod("card")}
-                        className={`p-6 rounded-2xl border-2 transition-all text-left ${
-                          paymentMethod === "card"
-                            ? "border-[#A020F0] bg-purple-50"
-                            : "border-gray-200 hover:border-[#A020F0]/50"
-                        }`}
-                      >
-                        <CreditCard
-                          size={32}
-                          className={
-                            paymentMethod === "card"
-                              ? "text-[#A020F0] mb-3"
-                              : "text-gray-400 mb-3"
-                          }
-                        />
-                        <p className="font-medium">Credit/Debit Card</p>
-                        <p className="text-sm text-gray-500">Visa, Mastercard, Amex</p>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod("upi")}
-                        className={`p-6 rounded-2xl border-2 transition-all text-left ${
-                          paymentMethod === "upi"
-                            ? "border-[#A020F0] bg-purple-50"
-                            : "border-gray-200 hover:border-[#A020F0]/50"
-                        }`}
-                      >
-                        <Phone
-                          size={32}
-                          className={
-                            paymentMethod === "upi"
-                              ? "text-[#A020F0] mb-3"
-                              : "text-gray-400 mb-3"
-                          }
-                        />
-                        <p className="font-medium">UPI</p>
-                        <p className="text-sm text-gray-500">Google Pay, PhonePe, Paytm</p>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod("netbanking")}
-                        className={`p-6 rounded-2xl border-2 transition-all text-left ${
-                          paymentMethod === "netbanking"
-                            ? "border-[#A020F0] bg-purple-50"
-                            : "border-gray-200 hover:border-[#A020F0]/50"
-                        }`}
-                      >
-                        <Building
-                          size={32}
-                          className={
-                            paymentMethod === "netbanking"
-                              ? "text-[#A020F0] mb-3"
-                              : "text-gray-400 mb-3"
-                          }
-                        />
-                        <p className="font-medium">Net Banking</p>
-                        <p className="text-sm text-gray-500">All major banks</p>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setPaymentMethod("wallet")}
-                        className={`p-6 rounded-2xl border-2 transition-all text-left ${
-                          paymentMethod === "wallet"
-                            ? "border-[#A020F0] bg-purple-50"
-                            : "border-gray-200 hover:border-[#A020F0]/50"
-                        }`}
-                      >
-                        <Wallet
-                          size={32}
-                          className={
-                            paymentMethod === "wallet"
-                              ? "text-[#A020F0] mb-3"
-                              : "text-gray-400 mb-3"
-                          }
-                        />
-                        <p className="font-medium">Wallet</p>
-                        <p className="text-sm text-gray-500">Paytm, PhonePe, Amazon Pay</p>
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Card Payment Details */}
-                  {paymentMethod === "card" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200"
-                    >
-                      <h3 className="text-xl mb-6">Card Details</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm mb-2 text-gray-700">
-                            Card Number *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="1234 5678 9012 3456"
-                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm mb-2 text-gray-700">
-                              Expiry Date *
-                            </label>
-                            <input
-                              type="text"
-                              required
-                              placeholder="MM/YY"
-                              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm mb-2 text-gray-700">
-                              CVV *
-                            </label>
-                            <input
-                              type="text"
-                              required
-                              placeholder="123"
-                              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label className="block text-sm mb-2 text-gray-700">
-                            Cardholder Name *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="John Doe"
-                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* UPI Payment Details */}
-                  {paymentMethod === "upi" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200"
-                    >
-                      <h3 className="text-xl mb-6">UPI Details</h3>
-                      <div>
-                        <label className="block text-sm mb-2 text-gray-700">
-                          UPI ID *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="yourname@upi"
-                          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                        />
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Net Banking Details */}
-                  {paymentMethod === "netbanking" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200"
-                    >
-                      <h3 className="text-xl mb-6">Select Your Bank</h3>
-                      <select
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
-                      >
-                        <option value="">Choose your bank</option>
-                        <option>State Bank of India</option>
-                        <option>HDFC Bank</option>
-                        <option>ICICI Bank</option>
-                        <option>Axis Bank</option>
-                        <option>Kotak Mahindra Bank</option>
-                        <option>Punjab National Bank</option>
-                      </select>
-                    </motion.div>
-                  )}
-
-                  {/* Wallet Payment Details */}
-                  {paymentMethod === "wallet" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-white rounded-3xl p-8 shadow-xl border border-gray-200"
-                    >
-                      <h3 className="text-xl mb-6">Select Wallet</h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        <button
-                          type="button"
-                          className="p-4 border-2 border-gray-200 rounded-xl hover:border-[#A020F0] transition-all"
-                        >
-                          <p className="font-medium">Paytm</p>
-                        </button>
-                        <button
-                          type="button"
-                          className="p-4 border-2 border-gray-200 rounded-xl hover:border-[#A020F0] transition-all"
-                        >
-                          <p className="font-medium">PhonePe</p>
-                        </button>
-                        <button
-                          type="button"
-                          className="p-4 border-2 border-gray-200 rounded-xl hover:border-[#A020F0] transition-all"
-                        >
-                          <p className="font-medium">Amazon Pay</p>
-                        </button>
-                        <button
-                          type="button"
-                          className="p-4 border-2 border-gray-200 rounded-xl hover:border-[#A020F0] transition-all"
-                        >
-                          <p className="font-medium">Mobikwik</p>
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Submit Payment Button */}
-                  {paymentMethod && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    >
-                      <button
-                        type="submit"
-                        className="w-full py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all text-lg"
-                      >
-                        Pay ₹{total}
-                      </button>
-                      <p className="text-xs text-gray-500 text-center mt-4">
-                        Your payment is secured with 256-bit SSL encryption
-                      </p>
-                    </motion.div>
-                  )}
-                </form>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -789,9 +504,8 @@ function ApplicationForm() {
         >
           <h2 className="text-4xl md:text-5xl mb-6">Apply Now</h2>
           <p className="text-lg text-gray-600 leading-relaxed">
-            Fill out the form below to apply for a CelestiCore internship. Complete the
-            payment to confirm your enrollment. You will receive a confirmation
-            email and dashboard access after successful payment.
+            Fill out the form below to apply for a CelestiCore internship. You will 
+            receive a confirmation email with next steps after submitting your application.
           </p>
         </motion.div>
 
@@ -881,9 +595,9 @@ function ApplicationForm() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
               >
                 <option value="">Select duration</option>
-                <option value="1">1 Month - ₹24,999</option>
-                <option value="2">2 Months - ₹41,999</option>
-                <option value="3">3 Months - ₹58,999</option>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
               </select>
             </div>
 
@@ -944,14 +658,13 @@ function ApplicationForm() {
             <div className="pt-6">
               <button
                 type="submit"
-                className="w-full py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all text-lg"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="hidden sm:inline">Submit Application & Proceed to Payment</span>
-                <span className="sm:hidden">Submit & Pay</span>
+                {isSubmitting ? "Submitting..." : "Submit Application"}
               </button>
               <p className="text-xs text-gray-500 text-center mt-4">
-                By submitting, you agree to our terms and conditions. A payment
-                page will open after submission.
+                By submitting, you agree to our terms and conditions.
               </p>
             </div>
           </div>

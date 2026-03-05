@@ -19,7 +19,7 @@ export function ServicesPage() {
     <div className="pt-24">
       <HeroSection />
       <ServicesGrid />
-      <PricingSection />
+      {/* <PricingSection /> */}
       <FAQSection />
     </div>
   );
