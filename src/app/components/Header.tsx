@@ -58,7 +58,7 @@ export function Header() {
           </div>
 
           <Link
-            to="/internships"
+            to="/internships#internship-form"
             className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
           >
             Apply Now
@@ -98,7 +98,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Link
-                  to="/internships"
+                  to="/internships#internship-form"
                   onClick={() => setIsMenuOpen(false)}
                   className="px-6 py-2.5 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full text-center"
                 >

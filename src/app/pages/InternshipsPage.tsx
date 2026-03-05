@@ -494,7 +494,7 @@ function ApplicationForm() {
 
   // Application Form
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-purple-50 to-[#FAFAFA]">
+    <section id="internship-form" ref={ref} className="py-24 bg-gradient-to-br from-purple-50 to-[#FAFAFA]">
       <div className="max-w-3xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
