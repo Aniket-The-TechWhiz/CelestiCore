@@ -480,7 +480,7 @@ function ApplicationForm() {
             </h2>
             <p className="text-lg text-gray-800 leading-relaxed mb-4">
               Thank you for applying to the CelestiCore internship program.
-              A confirmation email has been sent to <strong>{formData.email}</strong>
+              A confirmation email has been sent to <strong>internships@celesticore.com</strong>
             </p>
             <p className="text-base text-gray-700">
               Our team will review your application and reach out within 48
