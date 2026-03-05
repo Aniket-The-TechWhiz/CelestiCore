@@ -9,22 +9,22 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Sarah Johnson",
-    role: "CEO, TechStart Inc.",
+    name: "Suraj Pawar",
+    role: "",
     content:
       "CelestiCore transformed our vision into reality. Their team's expertise and dedication resulted in a product that exceeded our expectations.",
     rating: 5,
   },
   {
-    name: "Michael Chen",
-    role: "Product Manager, InnovateCo",
+    name: "Siddhant Jadhav",
+    role: "",
     content:
       "Working with CelestiCore was a game-changer. They delivered a scalable solution on time and within budget. Highly recommended!",
     rating: 5,
   },
   {
-    name: "Emily Rodriguez",
-    role: "Founder, DesignHub",
+    name: "Soham Velani",
+    role: "",
     content:
       "The UI/UX design services from CelestiCore elevated our brand. Their attention to detail and user-centric approach is unmatched.",
     rating: 5,
