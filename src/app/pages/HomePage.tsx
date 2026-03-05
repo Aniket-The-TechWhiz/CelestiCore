@@ -30,7 +30,7 @@ export function HomePage() {
       <ClientSuccessStories />
       <WhyChooseSection />
       <InternshipPromo />
-      <JobsPreview />
+      {/* <JobsPreview /> */}
       <TestimonialsSection />
     </div>
   );
