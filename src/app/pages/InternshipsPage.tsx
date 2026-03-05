@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router";
 import {
   Code,
   Smartphone,
@@ -16,6 +17,19 @@ import {
 } from "lucide-react";
 
 export function InternshipsPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle scroll to hash anchor
+    if (location.hash === '#internship-form') {
+      setTimeout(() => {
+        const element = document.getElementById('internship-form');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
   return (
     <div className="pt-24">
       <HeroSection />
