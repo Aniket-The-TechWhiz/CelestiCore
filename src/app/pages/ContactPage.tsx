@@ -186,8 +186,7 @@ function ContactSection() {
                 </div>
                 <div>
                   <h3 className="text-lg mb-1">Email</h3>
-                  <p className="text-gray-600">info@celesticore.com</p>
-                  <p className="text-gray-600">support@celesticore.com</p>
+                   <p className="text-gray-600">aniketyelameli26@gmail.com</p>
                 </div>
               </div>
 
@@ -218,7 +217,7 @@ function ContactSection() {
             {/* Quick Contact Buttons */}
             <div className="mt-12 space-y-3">
               <a
-                href="mailto:info@celesticore.com"
+                 href="mailto:aniketyelameli26@gmail.com"
                 className="flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all"
               >
                 <Mail size={20} />
@@ -381,12 +380,20 @@ function MapSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-3xl overflow-hidden border border-gray-200 shadow-xl relative"
+          className="rounded-3xl overflow-hidden border border-gray-200 shadow-xl"
         >
+          {/* Company header bar above the map */}
+          <div className="flex items-center gap-3 bg-white px-6 py-4 border-b border-gray-200">
+            <div className="w-3 h-3 rounded-full bg-[#A020F0]" />
+            <div>
+              <p className="font-bold text-[#A020F0] leading-tight">CelestiCore Technologies</p>
+              <p className="text-xs text-gray-500">Ganga Nagar, Hadapsar, Pune 411013</p>
+            </div>
+          </div>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405.3324482197517!2d73.95398764377836!3d18.485857849810778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2e9e6af6ad065%3A0x769e9f37f8dce27b!2sShiv%20Shakti%20Chowk%2C%20Gurudatta%20Nagar%2C%20Pune%2C%20Maharashtra%20412308!5e0!3m2!1sen!2sin!4v1772430805301!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=18.485857849810778,73.95398764377836&z=17&output=embed"
             width="100%"
-            height="450"
+            height="430"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
@@ -394,33 +401,6 @@ function MapSection() {
             title="CelestiCore Technologies Location"
             className="w-full"
           ></iframe>
-          
-          {/* Custom Location Marker Overlay */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full pointer-events-none"
-          >
-            <div className="relative">
-              {/* Location Pin */}
-              <div className="w-12 h-12 bg-gradient-to-br from-[#A020F0] to-[#8B3FD8] rounded-full shadow-xl flex items-center justify-center border-4 border-white">
-                <MapPin size={24} className="text-white" />
-              </div>
-              {/* Pin Tip */}
-              <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-[#8B3FD8] mx-auto"></div>
-              
-              {/* Label */}
-              <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                <div className="bg-white px-4 py-2 rounded-xl shadow-2xl border-2 border-[#A020F0]">
-                  <p className="text-sm font-semibold text-[#A020F0]">CelestiCore Technologies</p>
-                  <p className="text-xs text-gray-600">Pune, India</p>
-                </div>
-                {/* Arrow pointing down to pin */}
-                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white mx-auto mt-[-1px]"></div>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
 
         <motion.div

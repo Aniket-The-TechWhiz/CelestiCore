@@ -2,7 +2,6 @@ import { LucideIcon } from "lucide-react";
 import {
   TrendingUp,
   Zap,
-  Shield,
   Users,
   Award,
 } from "lucide-react";
@@ -24,39 +23,39 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    company: "FinanceFlow",
-    industry: "Fintech",
-    challenge: "Legacy banking system needed modernization",
-    solution: "Built a secure, scalable mobile banking platform",
+    company: "Gravity 2K26",
+    industry: "College Techfest",
+    challenge: "Unifying multi-domain events, registrations, and prize management for a large-scale college techfest",
+    solution: "Built a dynamic single-page event platform with Unstop registration integrations, sponsor showcases, and structured prize modules",
     results: [
-      { icon: TrendingUp, value: "300%", label: "User Growth" },
-      { icon: Zap, value: "60%", label: "Faster Transactions" },
-      { icon: Shield, value: "99.9%", label: "Uptime Achieved" },
-    ],
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    company: "HealthTrack",
-    industry: "Healthcare",
-    challenge: "Patient engagement and appointment management",
-    solution: "Comprehensive telemedicine and patient portal",
-    results: [
-      { icon: Users, value: "50K+", label: "Active Patients" },
-      { icon: TrendingUp, value: "85%", label: "Patient Satisfaction" },
-      { icon: Zap, value: "40%", label: "Admin Time Saved" },
-    ],
-    color: "from-emerald-500 to-teal-500",
-  },
-  {
-    company: "ShopNest",
-    industry: "E-commerce",
-    challenge: "Scale infrastructure for Black Friday demand",
-    solution: "Cloud-native platform with auto-scaling",
-    results: [
-      { icon: TrendingUp, value: "500%", label: "Traffic Handled" },
-      { icon: Zap, value: "<2s", label: "Page Load Time" },
-      { icon: Award, value: "₹40Cr+", label: "Revenue Generated" },
+      { icon: Award, value: "₹1L+", label: "Total Prize Pool" },
+      { icon: TrendingUp, value: "6+", label: "Competitive Events" },
+      { icon: Users, value: "₹199", label: "Starting Entry Fee" },
     ],
     color: "from-purple-500 to-pink-500",
+  },
+  {
+    company: "PrimeBuild",
+    industry: "Real Estate",
+    challenge: "Connecting buyers and renters with quality property listings through a trustworthy, conversion-focused online presence",
+    solution: "Developed a curated property discovery platform with filterable listings, client testimonials, FAQ support, and newsletter lead capture",
+    results: [
+      { icon: Award, value: "500+", label: "Properties Listed" },
+      { icon: Users, value: "1000+", label: "Happy Clients" },
+      { icon: TrendingUp, value: "4.9/5", label: "Client Rating" },
+    ],
+    color: "from-orange-500 to-amber-500",
+  },
+  {
+    company: "Phoenix Tech Academy",
+    industry: "Education",
+    challenge: "Delivering structured computer and technology education to students in Hadapsar, Pune with an accessible online presence",
+    solution: "Launched a responsive institute website with an admin-managed course catalog, enquiry flows, and facilities showcase",
+    results: [
+      { icon: Award, value: "4+", label: "Certified Courses" },
+      { icon: Zap, value: "100%", label: "Practical Training" },
+      { icon: Users, value: "Pune", label: "Hadapsar Campus" },
+    ],
+    color: "from-emerald-500 to-teal-500",
   },
 ];

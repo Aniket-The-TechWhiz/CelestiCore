@@ -9,7 +9,7 @@ dist/
 build/
 out/
 .next/
-
+html/
 # Environment variables
 .env
 .env.local

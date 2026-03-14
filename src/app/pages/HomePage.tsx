@@ -28,7 +28,7 @@ export function HomePage() {
       <AboutSection />
       <ServicesSection />
       <ClientSuccessStories />
-      <WhyChooseSection />
+      {/* <WhyChooseSection /> */}
       <InternshipPromo />
       {/* <JobsPreview /> */}
       <TestimonialsSection />
@@ -671,6 +671,9 @@ function TestimonialsSection() {
               </p>
               <div>
                 <p className="font-semibold">{testimonial.name}</p>
+                {testimonial.company && (
+                  <p className="text-sm font-medium text-[#A020F0]">{testimonial.company}</p>
+                )}
                 <p className="text-sm text-gray-500">{testimonial.role}</p>
               </div>
             </motion.div>
@@ -700,6 +703,9 @@ function TestimonialsSection() {
                 </p>
                 <div>
                   <p className="font-semibold">{testimonial.name}</p>
+                  {testimonial.company && (
+                    <p className="text-sm font-medium text-[#A020F0]">{testimonial.company}</p>
+                  )}
                   <p className="text-sm text-gray-500">{testimonial.role}</p>
                 </div>
               </motion.div>

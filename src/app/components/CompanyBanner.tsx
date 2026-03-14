@@ -2,21 +2,18 @@ import { motion } from "motion/react";
 
 export function CompanyBanner() {
   const companies = [
-    "Microsoft",
-    "Google",
-    "Amazon",
-    "Meta",
-    "Apple",
-    "Netflix",
-    "Tesla",
-    "IBM",
-    "Oracle",
-    "Adobe",
-    "Salesforce",
-    "Intel",
-    "Cisco",
-    "SAP",
-    "Nvidia",
+    "KJEI - Trinity Academy of Engineering",
+    "Phoenix Tech Academy",
+    "GDGoC - TAE",
+    "PrimeBuild",
+    "Gravity 2K26",
+    "Google for Developers",
+    "Unstop",
+    "Pune Startup Network",
+    "Maharashtra IT Community",
+    "Campus Innovation Forum",
+    "Tech Education Alliance",
+    "Digital Skills Foundation",
   ];
 
   // Duplicate for seamless loop
@@ -28,7 +25,7 @@ export function CompanyBanner() {
         <h3 className="text-center text-2xl md:text-3xl">
           Trusted by{" "}
           <span className="bg-gradient-to-r from-[#A020F0] to-[#2FFFA3] bg-clip-text text-transparent">
-            Leading Companies
+            Companies & Organizations
           </span>
         </h3>
       </div>

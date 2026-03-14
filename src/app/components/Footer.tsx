@@ -73,7 +73,7 @@ export function Footer() {
           <div>
             <h4 className="mb-4">Get In Touch</h4>
             <div className="flex flex-col gap-3 text-sm text-gray-400">
-              <p className="break-words">info@celesticore.com</p>
+              <p className="break-words">aniketyelameli26@gmail.com</p>
               {/*<p>+1 (555) 123-4567</p>*/}
               <div className="flex gap-4 mt-2">
                 <a
