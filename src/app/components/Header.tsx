@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,7 +8,7 @@ export function Header() {
 
   // Auto-scroll to top when route changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname]);
 
   const navItems = [
@@ -48,10 +47,7 @@ export function Header() {
               >
                 {item.label}
                 {isActive(item.path) && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-[#A020F0] to-[#2FFFA3]"
-                  />
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-[#A020F0] to-[#2FFFA3]" />
                 )}
               </Link>
             ))}
@@ -68,46 +64,42 @@ export function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-gray-700"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="flex flex-col gap-4 pt-4 pb-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`transition-colors ${
-                      isActive(item.path)
-                        ? "text-[#A020F0]"
-                        : "text-gray-700"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+        {isMenuOpen && (
+          <div id="mobile-navigation" className="md:hidden overflow-hidden">
+            <div className="flex flex-col gap-4 pt-4 pb-2">
+              {navItems.map((item) => (
                 <Link
-                  to="/internships#internship-form"
+                  key={item.path}
+                  to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className="px-6 py-2.5 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full text-center"
+                  className={`transition-colors ${
+                    isActive(item.path)
+                      ? "text-[#A020F0]"
+                      : "text-gray-700"
+                  }`}
                 >
-                  Apply Now
+                  {item.label}
                 </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              ))}
+              <Link
+                to="/internships#internship-form"
+                onClick={() => setIsMenuOpen(false)}
+                className="px-6 py-2.5 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full text-center"
+              >
+                Apply Now
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
     </header>
   );

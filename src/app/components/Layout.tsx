@@ -1,7 +1,16 @@
+import { lazy, Suspense } from "react";
 import { Outlet } from "react-router";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { CompanyBanner } from "./CompanyBanner";
+
+const Footer = lazy(async () => {
+  const module = await import("./Footer");
+  return { default: module.Footer };
+});
+
+const CompanyBanner = lazy(async () => {
+  const module = await import("./CompanyBanner");
+  return { default: module.CompanyBanner };
+});
 
 export function Layout() {
   return (
@@ -10,8 +19,12 @@ export function Layout() {
       <main>
         <Outlet />
       </main>
-      <CompanyBanner />
-      <Footer />
+      <Suspense fallback={null}>
+        <CompanyBanner />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
