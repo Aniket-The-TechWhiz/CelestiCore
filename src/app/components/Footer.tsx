@@ -109,8 +109,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-          <p>© 2026 CelestiCore — The Core Engine of Limitless Innovation. All rights reserved.</p>
+        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-400">
+          <p>© {new Date().getFullYear()} CelestiCore — The Core Engine of Limitless Innovation. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-[#2FFFA3] transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms"
+              className="hover:text-[#2FFFA3] transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

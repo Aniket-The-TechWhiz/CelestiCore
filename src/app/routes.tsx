@@ -32,6 +32,16 @@ const loadContactPage = async () => {
   return { Component: module.ContactPage };
 };
 
+const loadPrivacyPolicyPage = async () => {
+  const module = await import("./pages/PrivacyPolicyPage");
+  return { Component: module.PrivacyPolicyPage };
+};
+
+const loadTermsPage = async () => {
+  const module = await import("./pages/TermsPage");
+  return { Component: module.TermsPage };
+};
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +54,8 @@ export const router = createBrowserRouter([
       { path: "products", lazy: loadProductsPage },
       { path: "company", lazy: loadCompanyPage },
       { path: "contact", lazy: loadContactPage },
+      { path: "privacy-policy", lazy: loadPrivacyPolicyPage },
+      { path: "terms", lazy: loadTermsPage },
     ],
   },
 ]);

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Outlet } from "react-router";
 import { Header } from "./Header";
+import { CookieConsent } from "./CookieConsent";
 
 const Footer = lazy(async () => {
   const module = await import("./Footer");
@@ -25,6 +26,7 @@ export function Layout() {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
+      <CookieConsent />
     </div>
   );
 }
