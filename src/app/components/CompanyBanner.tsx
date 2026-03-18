@@ -2,13 +2,9 @@ import { motion } from "motion/react";
 
 export function CompanyBanner() {
   const companies = [
-    "KJEI - Trinity Academy of Engineering",
     "Phoenix Tech Academy",
-    "GDGoC - TAE",
     "PrimeBuild",
     "Gravity 2K26",
-    "Google for Developers",
-    "Unstop",
     "Pune Startup Network",
     "Maharashtra IT Community",
     "Campus Innovation Forum",
