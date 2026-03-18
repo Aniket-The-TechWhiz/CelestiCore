@@ -593,7 +593,7 @@ function ApplicationForm() {
                 <option value="web">Web Development</option>
                 <option value="app">App Development</option>
                 <option value="uiux">UI/UX Design</option>
-                <option value="cloud">Cloud & DevOps</option>
+                <option value="cloud">Java Development</option>
               </select>
             </div>
 
@@ -609,9 +609,9 @@ function ApplicationForm() {
                 className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#A020F0] focus:outline-none focus:ring-2 focus:ring-[#A020F0]/20 transition-all"
               >
                 <option value="">Select duration</option>
-                <option value="1">1 Month - ₹ 50</option>
-                <option value="2">2 Months - ₹ 100</option>
-                <option value="3">3 Months - ₹ 200</option>
+                <option value="1">1 Month</option>
+                <option value="2">2 Months</option>
+                <option value="3">3 Months</option>
               </select>
             </div>
 
