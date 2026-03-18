@@ -130,6 +130,11 @@ export function PrivacyPolicyPage() {
               You can control and manage cookies in various ways. Please be aware that removing or blocking
               cookies can impact your experience and some services may no longer function fully.
             </p>
+            <p className="mt-3">
+              We also provide a cookie consent banner on first visit. You can accept or decline advertising
+              and analytics cookies. If you decline, we do not load Google AdSense advertising code and we
+              keep ad and analytics storage disabled for this browser session unless you later opt in.
+            </p>
             <ul className="list-disc pl-6 space-y-2 mt-2">
               <li>
                 <strong>Browser controls:</strong> Most browsers allow you to view, manage, delete, and block
@@ -170,6 +175,10 @@ export function PrivacyPolicyPage() {
                 .
               </li>
             </ul>
+            <p className="mt-3">
+              To change your choice later, clear your browser's local storage and revisit the Site to reset
+              the consent banner.
+            </p>
           </section>
 
           <section>
@@ -243,10 +252,10 @@ export function PrivacyPolicyPage() {
               <p>
                 Email:{" "}
                 <a
-                  href="mailto:aniketyelameli26@gmail.com"
+                  href="mailto:support@celesticore.tech"
                   className="text-[#A020F0] hover:underline"
                 >
-                  aniketyelameli26@gmail.com
+                  support@celesticore.tech
                 </a>
               </p>
             </div>

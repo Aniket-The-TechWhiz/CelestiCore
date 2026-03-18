@@ -137,10 +137,10 @@ export function TermsPage() {
               <p>
                 Email:{" "}
                 <a
-                  href="mailto:aniketyelameli26@gmail.com"
+                  href="mailto:support@celesticore.tech"
                   className="text-[#A020F0] hover:underline"
                 >
-                  aniketyelameli26@gmail.com
+                  support@celesticore.tech
                 </a>
               </p>
             </div>

@@ -21,6 +21,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://celesticore.tech/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://celesticore.tech/internships</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -32,6 +37,106 @@
   </url>
   <url>
     <loc>https://celesticore.tech/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/privacy-policy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/terms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/modern-web-app-architecture-2026</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/saas-mvp-roadmap-from-idea-to-launch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/cloud-deployment-checklist-for-growing-businesses</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/ai-automation-for-small-business-operations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/website-speed-optimization-for-conversion-growth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/b2b-landing-page-framework-that-generates-leads</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/startup-branding-playbook-for-trust-and-credibility</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/api-design-best-practices-for-saas-products</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/mobile-first-ux-principles-for-business-websites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/how-to-plan-a-secure-contact-form-pipeline</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/product-discovery-framework-for-tech-teams</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/technical-seo-basics-for-business-sites</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/content-strategy-for-service-based-tech-companies</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/designing-scalable-admin-dashboards</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/effective-internal-linking-for-seo-and-engagement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/build-vs-buy-tech-decisions-for-founders</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://celesticore.tech/blog/practical-analytics-plan-for-website-growth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

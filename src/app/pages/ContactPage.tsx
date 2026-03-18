@@ -186,7 +186,7 @@ function ContactSection() {
                 </div>
                 <div>
                   <h3 className="text-lg mb-1">Email</h3>
-                   <p className="text-gray-600">aniketyelameli26@gmail.com</p>
+                   <p className="text-gray-600">support@celesticore.tech</p>
                 </div>
               </div>
 
@@ -217,7 +217,7 @@ function ContactSection() {
             {/* Quick Contact Buttons */}
             <div className="mt-12 space-y-3">
               <a
-                 href="mailto:aniketyelameli26@gmail.com"
+                 href="mailto:support@celesticore.tech"
                 className="flex items-center justify-center gap-3 w-full py-4 bg-gradient-to-r from-[#A020F0] to-[#8B3FD8] text-white rounded-full hover:shadow-xl hover:shadow-purple-500/50 transition-all"
               >
                 <Mail size={20} />

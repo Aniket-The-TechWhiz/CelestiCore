@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { X, Cookie } from "lucide-react";
-
-const CONSENT_KEY = "cc_consent";
+import { CONSENT_KEY, setConsent } from "../lib/consent";
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -17,12 +16,12 @@ export function CookieConsent() {
   }, []);
 
   const accept = () => {
-    localStorage.setItem(CONSENT_KEY, "accepted");
+    setConsent("accepted");
     setVisible(false);
   };
 
   const decline = () => {
-    localStorage.setItem(CONSENT_KEY, "declined");
+    setConsent("declined");
     setVisible(false);
   };
 
